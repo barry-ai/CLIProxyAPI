@@ -151,12 +151,6 @@ func (t *utlsRoundTripper) RoundTrip(req *http.Request) (*http.Response, error) 
 		}
 		return nil, err
 	}
-	if resp == nil {
-		if errClose := closeConnection(); errClose != nil {
-			log.Debugf("utls: close connection after empty response: %v", errClose)
-		}
-		return nil, fmt.Errorf("utls: upstream returned an empty response")
-	}
 	if resp.Body == nil {
 		resp.Body = http.NoBody
 	}
